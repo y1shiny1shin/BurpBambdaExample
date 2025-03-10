@@ -1,0 +1,2 @@
+# BurpBambdaExample
+渗透测试过程中使用Bambda模式过滤讨厌的脏包
