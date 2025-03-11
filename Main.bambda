@@ -1,0 +1,61 @@
+var mimeType = requestResponse.mimeType();
+var host = requestResponse.request().httpService().host();
+
+String[] excludeDomain = {
+    ".*google.*",
+    ".*freebuf.com",
+    ".*googleapis.com",
+    ".*firefox.com",
+    ".*mozilla.*",
+   	".*baidu.com",
+   	".*gtimg.com",
+   	".*github.com",
+   	".*csdn.net",
+   	".*aliyun.com",
+   	".*adtidy.org",
+   	".*qianxin.com",
+   	".*immersivetranslate.com",
+   	".*mozilla.com",
+   	".*openjfx.cn",
+   	".*feishu.cn",
+   	".*grok.com",
+   	".*map.qq.com",
+   	".*mozilla.net",
+   	".*qpic.cn",
+   	".*amazonaws.com",
+   	".*gstatic.com",
+   	".*aliapp.org",
+   	".*alicdn.com",
+   	".*greasyfork.org",
+   	".*sohu.com",
+    ".*youtube.com",
+    ".*piwik.pro",
+    ".*googletagmanager.com",
+    ".*doubleclick.net",
+    ".*portswigger.net",
+    ".*geetest.com",
+    ".*licdn.com"
+    
+};
+boolean isExcluded = Arrays.stream(excludeDomain)
+    .map(Pattern::compile) 
+    .anyMatch(pattern -> pattern.matcher(host).find());
+
+boolean isExcludeMimeType = 
+    mimeType != MimeType.CSS
+ && mimeType != MimeType.IMAGE_UNKNOWN
+ && mimeType != MimeType.IMAGE_JPEG
+ && mimeType != MimeType.IMAGE_GIF
+ && mimeType != MimeType.IMAGE_PNG
+ && mimeType != MimeType.IMAGE_BMP
+ && mimeType != MimeType.IMAGE_TIFF
+ && mimeType != MimeType.UNRECOGNIZED
+ && mimeType != MimeType.SOUND
+ && mimeType != MimeType.VIDEO
+ && mimeType != MimeType.FONT_WOFF
+ && mimeType != MimeType.FONT_WOFF2
+ && mimeType != MimeType.APPLICATION_UNKNOWN;
+
+return !isExcluded && isExcludeMimeType;
+
+
