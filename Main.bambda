@@ -1,3 +1,4 @@
+var path = requestResponse.request().pathWithoutQuery().toLowerCase();
 var mimeType = requestResponse.mimeType();
 var host = requestResponse.request().httpService().host();
 
@@ -34,7 +35,53 @@ String[] excludeDomain = {
     ".*doubleclick.net",
     ".*portswigger.net",
     ".*geetest.com",
-    ".*licdn.com"
+    ".*licdn.com",
+    ".*csdnimg.cn",
+    ".*intercom.io",
+    ".*tampermonkey.net",
+    ".*chatgpt.com",
+    ".*aliyun.com",
+    ".*52pojie.cn",
+    ".*bing.com",
+    ".*darkreader.org",
+    ".*crossbell.io",
+    ".*xlog.page",
+    ".*cnblogs.com",
+    ".*githubusercontent.com",
+    ".*datadoghq.com",
+    ".*chinaz.com",
+    ".*clarity.ms",
+    ".*cloudflare.*",
+    ".*bdstatic.com",
+    ".*y4er.com",
+    ".*pstatp.com",
+    ".*utteranc.es",
+    ".*ys7.com",
+    ".*sicnu.edu.cn",
+    ".*zhihuishu.com",
+    ".*polymas.com",
+    ".*lencr.org",
+    ".*githubassets.com",
+    ".*101.227.212.166.*",
+    ".*docker.com",
+    ".*taobao.com",
+    ".*gitbook.com",
+    ".*gitbook.io",
+    ".*runoob.com",
+    ".*discourse-cdn.com",
+    ".*alibabacloud.com",
+    ".*mmstat.com",
+    ".*aliyuncs.com",
+    ".*alipay.com",
+    ".*fontawesome.com",
+    ".*segment.com",
+    ".*segment.io",
+    ".*bytecdntp.com",
+    ".*giocdn.com",
+    ".*pingcode.com",
+    ".*worktile.com",
+    ".*butian.net",
+    ".*growingio.com"
     
 };
 boolean isExcluded = Arrays.stream(excludeDomain)
@@ -56,6 +103,10 @@ boolean isExcludeMimeType =
  && mimeType != MimeType.FONT_WOFF2
  && mimeType != MimeType.APPLICATION_UNKNOWN;
 
-return !isExcluded && isExcludeMimeType;
+boolean isExcludedExtension = 
+    !path.endsWith(".css")
+ && !path.endsWith(".ico");
+
+return !isExcluded && isExcludeMimeType && isExcludedExtension;
 
 
